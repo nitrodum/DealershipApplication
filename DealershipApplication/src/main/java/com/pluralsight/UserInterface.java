@@ -17,12 +17,18 @@ public class UserInterface {
         this.dealership = loader.getDealership();
     }
 
+    public void close() {
+        DealershipFileManager saver = new DealershipFileManager();
+        saver.saveDealership(this.dealership);
+        scanner.close();
+    }
+
     public void display() {
         init();
         while (running) {
             menu();
         }
-        scanner.close();
+        close();
     }
 
     private void menu() {
@@ -143,11 +149,42 @@ public class UserInterface {
     }
 
     private void processAddVehicleRequest() {
+        System.out.println("Enter the vin of the car:");
+        int vin = scanner.nextInt();
+        System.out.println("Enter the year of the car:");
+        int year = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter the make of the car:");
+        String make = scanner.nextLine();
+        System.out.println("Enter the model of the car:");
+        String model = scanner.nextLine();
+        System.out.println("Enter the type of the car:");
+        String type = scanner.nextLine();
+        System.out.println("Enter the color of the car:");
+        String color = scanner.nextLine();
+        System.out.println("Enter the mileage of the car:");
+        int mileage = scanner.nextInt();
+        System.out.println("Enter the price of the car:");
+        double price = scanner.nextDouble();
+        scanner.nextLine();
 
+        Vehicle vehicle = new Vehicle(vin, year, make, model, type, color, mileage, price);
+        dealership.addVehicle(vehicle);
     }
 
     private void processRemoveVehicleRequest() {
-
+        System.out.println("Enter the VIN of the vehicle you want to remove");
+        int vin = scanner.nextInt();
+        scanner.nextLine();
+        Vehicle toRemove = null;
+        for (Vehicle vehicle : dealership.getAllVehicles()) {
+            if (vehicle.getVin() == vin) {
+                toRemove = vehicle;
+            }
+        }
+        if (toRemove != null) {
+            dealership.removeVehicle(toRemove);
+        }
     }
 
     private void displayVehicles(List<Vehicle> vehicles) {
