@@ -1,5 +1,6 @@
 package com.pluralsight;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -72,32 +73,68 @@ public class UserInterface {
                 break;
             default:
                 System.out.println("Invalid Option, Please Choose a Valid Option");
-
         }
+        System.out.println("Enter any input to continue");
+        String buffer = scanner.nextLine();
     }
 
     private void processGetByPriceRequest() {
+        System.out.println("Enter the minimum price to search for:");
+        int min = scanner.nextInt();
+        System.out.println("Enter the maximum price to search for:");
+        int max = scanner.nextInt();
+        scanner.nextLine();
 
+        List<Vehicle> filteredByPrice = dealership.getVehiclesByPrice(min, max);
+        displayVehicles(filteredByPrice);
     }
 
     private void processGetByMakeModelRequest() {
-
+        System.out.println("Enter the make of the car:");
+        String make = scanner.nextLine();
+        System.out.println("Enter the model of the car");
+        String model = scanner.nextLine();
+        
+        List<Vehicle> filteredByMakeModel = dealership.getVehiclesByMakeModel(make, model);
+        displayVehicles(filteredByMakeModel);
     }
 
     private void processGetByYearRequest() {
+        System.out.println("Enter the start year to search for:");
+        int min = scanner.nextInt();
+        System.out.println("Enter the end year to search for:");
+        int max = scanner.nextInt();
+        scanner.nextLine();
 
+        List<Vehicle> filteredByYear = dealership.getVehiclesByYear(min, max);
+        displayVehicles(filteredByYear);
     }
 
     private void processGetByColorRequest() {
+        System.out.println("Enter the color to search for:");
+        String color = scanner.nextLine();
 
+        List<Vehicle> filteredByColor = dealership.getVehiclesByColor(color);
+        displayVehicles(filteredByColor);
     }
 
     private void processGetByMileageRequest() {
+        System.out.println("Enter the minimum mileage to search for:");
+        int min = scanner.nextInt();
+        System.out.println("Enter the maximum mileage to search for:");
+        int max = scanner.nextInt();
+        scanner.nextLine();
 
+        List<Vehicle> filteredByMileage = dealership.getVehiclesByMileage(min, max);
+        displayVehicles(filteredByMileage);
     }
 
     private void processGetByVehicleTypeRequest() {
+        System.out.println("Enter the vehicle type to search for:");
+        String type = scanner.nextLine();
 
+        List<Vehicle> filteredByType = dealership.getVehiclesByType(type);
+        displayVehicles(filteredByType);
     }
 
     private void processGetAllVehiclesRequest() {
