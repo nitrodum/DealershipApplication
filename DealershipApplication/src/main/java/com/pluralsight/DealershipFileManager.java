@@ -4,7 +4,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class DealershipFileManager {
-    public static Dealership getDealership() {
+    public DealershipFileManager() {
+
+    }
+
+    public Dealership getDealership() {
         try {
             BufferedReader bufferedReader = new BufferedReader( new FileReader("inventory.csv"));
             String input = bufferedReader.readLine();
@@ -23,7 +27,7 @@ public class DealershipFileManager {
         return null;
     }
 
-    public static void saveDealership(Dealership dealership) {
+    public void saveDealership(Dealership dealership) {
 
     }
 }
